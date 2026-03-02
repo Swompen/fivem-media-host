@@ -160,3 +160,6 @@ GPL v3 - See LICENSE file
 ## Support
 
 Issues: https://github.com/Swompen/fivem-media-host/issues
+
+##This project is based on https://github.com/EGOistentum/fivem-media with security hardening and production improvements.
+
