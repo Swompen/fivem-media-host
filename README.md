@@ -1,6 +1,7 @@
 # FiveM Media Host
 
 Self-hosted media hosting API for FiveM servers. Upload, manage, and serve images, videos, and audio files with admin dashboard, rate limiting, and secure authentication.
+<img width="2539" height="1262" alt="{ABE9906D-B64A-47D1-8176-72414B4A2131}" src="https://github.com/user-attachments/assets/3598761e-d164-4a28-8fbe-6dde4a237142" />
 
 ## Features
 
@@ -151,77 +152,6 @@ setr lbphone_media_host "https://your-domain.com"
 setr lbphone_media_api_key "YOUR_API_KEY_HERE"
 ```
 
-## Production Deployment
-
-### Nginx Reverse Proxy
-
-```nginx
-server {
-    listen 443 ssl http2;
-    server_name media.your-domain.com;
-
-    ssl_certificate /path/to/cert.pem;
-    ssl_certificate_key /path/to/key.pem;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_connect_timeout 60s;
-        proxy_send_timeout 300s;
-        proxy_read_timeout 300s;
-    }
-}
-```
-
-### Backup
-
-```bash
-docker compose exec api tar czf ../backup.tar.gz uploads/ data/
-```
-
-### Health Check
-
-```bash
-curl http://localhost:3000/api/media \
-  -H "x-api-key: YOUR_API_KEY"
-```
-
-## Security
-
-This project includes:
-- Timing-safe authentication (constant-time comparison)
-- Length padding against timing attacks on API keys
-- Rate limiting on login endpoint
-- File type whitelist validation
-- CORS disabled by default
-- No hardcoded secrets
-
-Best practices:
-1. Use strong, randomly-generated secrets
-2. Always use HTTPS in production
-3. Keep your API_KEY secret
-4. Regularly backup uploads/ and data/ directories
-5. Monitor logs for failed login attempts
-
-## Troubleshooting
-
-Container won't start:
-```bash
-docker compose logs api
-```
-
-Can't upload files:
-- Verify API key is correct
-- File must be in allowed format
-- Check disk space
-
-Admin login fails:
-- Verify .env credentials
-- Rate limiting: 5 attempts per 60 seconds
-- Restart: `docker compose restart api`
 
 ## License
 
