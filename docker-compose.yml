@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: fivem-media-host
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/app/uploads
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/media"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s

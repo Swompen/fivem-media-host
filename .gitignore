@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+app/dist/
+dashboard/dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# User data — NEVER commit these
+uploads/
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+fivem-media-host.tar.gz
+*.tar.gz
+coverage/
+.turbo/
